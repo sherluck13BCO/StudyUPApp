@@ -56,9 +56,20 @@ app.get('/profile', requireSignedIn, function(req, res) {
 		const email =req.user.email;
 
 	User.findOne({ where: {email:email} }).then(function(user) {
+		
+
+
+			File.findAll({ where: {user_id:req.user.id} }).then(function(results) {
+		console.log(results);
 		res.render('profile.html', {
+			files:results,
 			user: user
 		});
+	});
+
+		// res.render('profile.html', {
+		// 	user: user
+		// });
 	});
 });
 
@@ -77,6 +88,8 @@ app.get('/course', function(req, res) {
 		});
 	});
 });
+
+
 
 app.get('/files',  function(req, res) {
 
