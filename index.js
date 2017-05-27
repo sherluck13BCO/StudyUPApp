@@ -65,8 +65,21 @@ app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function
 		 
 	});
 });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    var originalname = file.originalname;
+    var extension = originalname.split(".");
+    filename = Date.now() + '.' + extension[extension.length-1];
+    cb(null, filename);
+  }
+});
 
-const file_upload = multer({dest: './uploads'});
+//const file_upload = multer({dest: './uploads'});
+
+const file_upload = multer({storage:storage});
 
 app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(req, res){
 
