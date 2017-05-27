@@ -50,18 +50,18 @@ const File = database.define('files', {
             model: 'users',
             key: 'id'
         }
+    },
+    description: {
+        type: Sequelize.STRING
     }
 }, {
     timestamps: true
 });
 
-// User.hasMany(Account, { foreignKey: 'user_id' });
 File.belongsTo(User, { foreignKey: 'user_id' });
-// Account.belongsTo(User, { foreignKey: 'user_id' , foreignKeyConstraint:true });
 
 database.sync();
 
- module.exports.File = File;
+module.exports.File = File;
 
 module.exports.User = User;
-// module.exports.Account = Account;
