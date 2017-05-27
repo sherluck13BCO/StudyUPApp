@@ -87,9 +87,9 @@ app.get('/files',  function(req, res) {
 	res.render('files.html');
 });
 
-const upload = multer({dest: './uploads'})
+const avatarpic = multer({dest: './avatar_pics'})
 
-app.post('/upload-avatar', requireSignedIn, upload.single('avatar'), function(req, res){
+app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
 
 	const email = req.user;
 
