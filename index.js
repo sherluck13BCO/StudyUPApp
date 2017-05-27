@@ -70,7 +70,12 @@ app.get('/', function(req, res) {
 
 app.get('/course', function(req, res) {
 	
-	res.render('course.html');
+	File.findAll().then(function(results) {
+		console.log(results);
+		res.render('course.html', {
+			files:results
+		});
+	});
 });
 
 app.get('/files',  function(req, res) {
@@ -118,7 +123,7 @@ app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(re
 	File.create({
             name:'/uploads/' + req.file.filename,
             course: req.body.course_code + req.body.course_number,
-            user_id:email.id,
+            user_id:req.user.id,
             description: req.body.description
         }).then(function(response) {
             //req.flash('signUpMessage', 'Signed up successfully!');

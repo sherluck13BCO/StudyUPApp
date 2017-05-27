@@ -120,19 +120,14 @@
 					</tr>
 				</thead>
 	          <tbody>
-	            <tr>
-	              <td>CMSC123</td>
-	              <td>7/6/17</td>
-	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
-	            </tr>
 
 	            {% for file in files %}
+	            <tr>
 				  <td>{{ file.course }}</td>
 	              <td>{{ file.description }}</td>
 	              <td>{{ file.createdAt }}</td>
 	              <td><a href="{{file.name}}">file</a></td>
-				{% else %}
-				  <li>Empty file</li>
+				<tr />
 				{% endfor %}
 
 
