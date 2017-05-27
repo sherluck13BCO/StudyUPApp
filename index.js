@@ -37,6 +37,7 @@ var user = function retrieveSignedInUser(req, res, next) {
     	// 	//req.session.currentUser = user;
     	// console.log("retrieveSignedInUser3" + req.session.currentUser);
     	req.user = user;
+    	currentUse =user;
     	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
     	console.log(req.user);
     	// next();
@@ -51,26 +52,29 @@ app.use(user);
 
 
 app.get('/profile', requireSignedIn, function(req, res) {
-	const email = req.user;
-	const name = email;
-	User.findOne({ where: {name: name} }).then(function(user) {
+	console.log()
+	const email =req.session.currentUser;
+
+	User.findOne({ where: {email:email} }).then(function(user) {
 		res.render('profile.html', {
 			user: user
 		});
 	});
 });
 
-app.get('/profile',function(req, res) {
-	// const email = req.user;
-	// const name = email;
-	// User.findOne({ where: {name: name} }).then(function(user) {
-	// 	res.render('profile.html', {
-	// 		user: user
-	// 	});
-	// });
+// app.get('/profile',function(req, res) {
+// 	// const email = req.user;
+// 	// const name = email;
+// 	// User.findOne({ where: {name: name} }).then(function(user) {
+// 	// 	res.render('profile.html', {
+// 	// 		user: user
+// 	// 	});
+// 	// });
 
-	res.render('profile.html');
-});
+// 	res.render('profile.html',{
+// 		useravatar:req.user.av
+// 	});
+// });
 
 app.get('/', function(req, res) {
 	console.log("HELLLOO");
@@ -103,11 +107,15 @@ const avatarpic = multer({dest: './avatar_pics'})
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
 
-console.log("wokieeeeeeeeeeee")
+console.log("wokieeeeeeeeeeee-----------------------------------------------------------")
 	console.log(req.file)
-	const email = req.user.email;
+	const email = req.session.currentUser;
+	console.log(email);
+console.log("KAJSKDFASDKFHASDFHLASDHLFD----------------------------------------------------------")
 
-		console.log(req.user);
+		// console.log(req.user);
+		console.log("wokieeeeeeeeeeee-----------------------------------AKSHDJLFLJKSDAF------------------------")
+
 
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
@@ -126,8 +134,11 @@ function requireSignedIn(req, res, next) {
     if (!req.session.currentUser) {
         return res.redirect('/');
     }
+
     next();
 }
+
+
 
 
 
