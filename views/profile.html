@@ -51,7 +51,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                	<li><a href="/course">FILES</a></li>
+                  <li><a href="/course">FILES</a></li>
                     <li><a href="/signout">SIGN OUT</a></li>
                     
                 </ul>
@@ -78,11 +78,11 @@
 
           <div class="col-md-8">
             <div class="alert alert-info">
-	            {% if user.name %}
-	            	 <h2>{{ user.name }}</h2>
-	            {% else %}
-	            	 <h2>Name here</h2>
-	            {% endif %}
+              {% if user.name %}
+                 <h2>{{ user.name }}</h2>
+              {% else %}
+                 <h2>Name here</h2>
+              {% endif %}
              
             </div>
 
@@ -93,23 +93,80 @@
                 <div class="panel-heading" role="tab" id="headingOne">
                   <h4 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"  aria-controls="collapseOne" aria-expanded="false">
-                      Upload Books
+                      Upload Files
                     </a>
                   </h4>
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body form-group">
                     <!--transfer -->
-                    <form action="/transfer" method="post" >
+                    <form action="/uploadFile" method="post" >
+
                       <div>
-                        <label for="recipient">Transfer To</label>
-                        <input type="text" name="recipient" id="recipient" class="form-control">
+                        <label for="course_number">Course Code</label>
+                          <select class="form-control" id="course_number" name="course_code">
+                            <option value ="BROADCAST SPEECH AND PERFORMANCE">BROADCAST SPEECH AND PERFORMANCE</option>
+                            <option value ="BIOLOGY">BIOLOGY</option>
+                            <option value ="BUSINESS MANAGEMENT">BUSINESS MANAGEMENT</option>
+                            <option value ="CEBUANO">CEBUANO</option>
+                            <option value ="CHEMISTRY">CHEMISTRY</option>
+                            <option value ="COMPUTER SCIENCE">COMPUTER SCIENCE</option>
+                            <option value ="COMMUNICATION">COMMUNICATION</option>
+                            <option value ="DESIGN">DESIGN</option>
+                            <option value ="DEVT COMMUNICATION">DEVT COMMUNICATION</option>
+                            <option value ="ECONOMICS">ECONOMICS</option>
+                            <option value ="FINE ARTS">FINE ARTS</option>
+                            <option value ="GEOGRAPHY">GEOGRAPHY</option>
+                            <option value ="GEOLOGY">GEOLOGY</option>
+                            <option value ="HISTORY">HISTORY</option>
+                            <option value ="HUMANITIES">HUMANITIES</option>
+                            <option value ="NATURAL SCIENCE">NATURAL SCIENCE</option>
+                            <option value ="JAPANESE">JAPANESE</option>
+                            <option value ="JOURNALISM">JOURNALISM</option>
+                            <option value ="LITERATURE">LITERATURE</option>
+                            <option value ="MATHEMATICS">MATHEMATICS</option>
+                            <option value ="MANAGEMENT">MANAGEMENT</option>
+                            <option value ="NSTP CWTS">NSTP CWTS</option>
+                            <option value ="PHYSICAL EDUCATION">PHYSICAL EDUCATION</option>
+                            <option value ="PHILOSOPHY">PHILOSOPHY</option>
+                            <option value ="PHYSICS">PHYSICS</option>
+                            <option value ="PI">PI</option>
+                            <option value ="POLITICAL SCIENCE">POLITICAL SCIENCE</option>
+                            <option value ="PSYCHOLOGY">PSYCHOLOGY</option>
+                            <option value ="SFA">SFA</option>
+                            <option value ="SOCIAL SCIENCE">SOCIAL SCIENCE</option>
+                            <option value ="SOCIOLOGY">SOCIOLOGY</option>
+                            <option value ="STATISTICS">STATISTICS</option>
+                            <option value ="SCIENCE, TECHNOLOGY AND SOCIETY">SCIENCE, TECHNOLOGY AND SOCIETY</option>
+                            <option value ="TFA">TFA</option>
+                            <option value ="THEATER">THEATER</option>
+                            <option value ="VISUAL COMMUNICATION">VISUAL COMMUNICATION</option>
+                            <option value ="ZOOLOGY">ZOOLOGY</option>
+                          </select>
                       </div>
+
+                      <br />
+
                       <div>
-                        <label for="amount">Transfer Amount</label>
-                        <input type="number" name="amount" id="amount" class="form-control">
+                        <label for="course_number">Course Number</label>
+                        <input type="number" name="course_number" id="course_number" class="form-control">
                       </div>
-                     <button class="btn btn-submit">Transfer</button>
+
+                      <br />
+
+                      <div>
+                        <label for="name">File Name</label>
+                        <input type="text" name="name" id="name" class="form-control">
+                      </div>
+                      
+                      <br />
+
+                      <div>
+                        <label for="file">File</label>
+                        <input type="file" name="file" id="file" class="form-control">
+                      </div>
+
+                     <button class="btn btn-submit">Upload</button>
 
                     </form>
                   </div>
@@ -127,14 +184,14 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body form-group">
-                  	<form action="/upload-avatar" method = "post" enctype="multipart/form-data">
-		              <div>
-		                <label for="recipient">Upload</label>
-		                <input type="file" name="avatar" id="avatar" class="form-control">
+                    <form action="/upload-avatar" method = "post" enctype="multipart/form-data">
+                  <div>
+                    <label for="recipient">Upload</label>
+                    <input type="file" name="avatar" id="avatar" class="form-control">
 
-		                <button class="btn btn-submit">Upload</button>
-		              </div>
-		           </form> 
+                    <button class="btn btn-submit">Upload</button>
+                  </div>
+               </form> 
                     
                   </div>
                 </div>
@@ -146,32 +203,32 @@
     </div>
 
     <!-- Modal -->
-	<div id="uploadPhoto" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
+  <div id="uploadPhoto" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">Please choose a new profile photo</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<div class="form-group">
-	          	<form action="/upload-avatar" method = "post" enctype="multipart/form-data">
-	              <div>
-	                <label for="recipient">Photo</label>
-	                <input type="file" name="avatar" id="avatar" class="form-control">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Please choose a new profile photo</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <form action="/upload-avatar" method = "post" enctype="multipart/form-data">
+                <div>
+                  <label for="recipient">Photo</label>
+                  <input type="file" name="avatar" id="avatar" class="form-control">
 
-	                <button class="btn btn-submit">Upload</button>
-	              </div>
-	           </form> 
-	        </div>
-	       
-	      </div>
-	    </div>
+                  <button class="btn btn-submit">Upload</button>
+                </div>
+             </form> 
+          </div>
+         
+        </div>
+      </div>
 
-	  </div>
-	</div>
+    </div>
+  </div>
 
     <!-- REQUIRED SCRIPTS FILES -->
     <!-- CORE JQUERY FILE -->
