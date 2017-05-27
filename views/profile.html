@@ -195,58 +195,35 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                   <div class="panel-body form-group">
-                   
-<!-- 
-                    <form action="/upload-avatar" method = "post" enctype="multipart/form-data">
-                  <div>
-                    <label for="recipient">Upload</label>
-                    <input type="file" name="avatar" id="avatar" class="form-control">
+                  
 
-                    <button class="btn btn-submit">Upload</button>
+
+                    <div class="row">
+                        <table data-toggle="table" data-sort-name="date" data-sort-order="desc" class = "table">
+                        <thead>
+                          <tr>
+                            <th data-field="subject" data-sortable="true"> Subject </th>
+                            <th data-field="description" data-sortable="true"> Description </th>
+                            <th data-field="file" data-sortable="true"> File </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for file in files %}
+                            <tr>
+                              <td>{{ file.course }}</td>
+                              <td>{{ file.description }}</td>
+                              <td><a href="{{file.name}}">file</a></td>
+                            <tr />
+                            {% endfor %}
+
+                        </tbody>
+                        </table>
+      
+                    </div>
+  
                   </div>
-               </form>  -->
-
-
-                <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class=" table-final">
-          <table data-toggle="table" data-sort-name="date" data-sort-order="desc" class = "table-final">
-          <thead>
-          <tr>
-            <th data-field="subject" data-sortable="true"> Subject </th>
-            <th data-field="description" data-sortable="true"> Description </th>
-            <!-- <th data-field="date" data-sortable="true"> Date Posted </th> -->
-            <th data-field="file" data-sortable="true"> File </th>
-          </tr>
-        </thead>
-            <tbody>
-
-              {% for file in files %}
-              <tr>
-          <td>{{ file.course }}</td>
-                <td>{{ file.description }}</td>
-              <!--   <td>{{ file.createdAt }}</td> -->
-                <td><a href="{{file.name}}">file</a></td>
-        <tr />
-        {% endfor %}
-
-
-              <!--<tr>
-                <td>CMSC123</td>
-                <td>7/6/17</td>
-                <td>Notes for Quiz 5</td>
-                <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
-              </tr>-->
-
-
-            </tbody>
-            
-          </table>
-        </div><!--end of .table-responsive-->
-      </div>
-    </div>
-  </div>
+                </div>
+              </div>
 
 
 
