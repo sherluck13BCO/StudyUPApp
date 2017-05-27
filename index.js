@@ -24,6 +24,8 @@ app.use(flash());
 
 app.use('/static', express.static('./static'));
 app.use('/avatars', express.static('./avatar_pics'));
+app.use('/uploads', express.static('./uploads'));
+
 app.use(require('./auth'));
 
 
@@ -124,6 +126,24 @@ console.log("KAJSKDFASDKFHASDFHLASDHLFD-----------------------------------------
 		});
 		 
 	});
+
+	
+});
+
+const file_upload = multer({dest: './uploads'});
+
+app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(req, res){
+
+	const email = req.session.currentUser;
+	
+	File.create({
+            name:'/uploads/' + req.file.filename,
+            course: req.body.course_code + req.body.course_number,
+            user:email.id
+        }).then(function(response) {
+            //req.flash('signUpMessage', 'Signed up successfully!');
+            return res.redirect('/profile');
+        });
 
 	
 });
