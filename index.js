@@ -34,101 +34,61 @@ var user = function retrieveSignedInUser(req, res, next) {
   	const email = req.session.currentUser;
 
     User.findOne({ where: { email:email } }).then(function(user) {
-    	// console.log("retrieveSignedInUser" + user);
-    	
-    	// console.log("retrieveSignedInUser2" + req.session.currentUser);
-    	// 	//req.session.currentUser = user;
-    	// console.log("retrieveSignedInUser3" + req.session.currentUser);
     	req.user = user;
-    	// console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
-    	// console.log(req.user);
     	next();
     });
-    // next();
-
 }
 
 app.use(user);
 
 app.get('/profile', requireSignedIn, function(req, res) {
-	
-
-	// const email =req.session.currentUser;
-		const email =req.user.email;
+	const email =req.user.email;
 
 	User.findOne({ where: {email:email} }).then(function(user) {
-		
-
-
-			File.findAll({ where: {user_id:req.user.id} }).then(function(results) {
-		// console.log(results);
+		File.findAll({ where: {user_id:req.user.id} }).then(function(results) {
 		res.render('profile.html', {
 			files:results,
 			user: user
 		});
 	});
-
-		// res.render('profile.html', {
-		// 	user: user
-		// });
 	});
 });
 
 app.get('/', function(req, res) {
-
-	// console.log("HELLLOO");
 	res.render('index.html');
 });
 
 app.get('/course', function(req, res) {
-	console.log("insidecourse-------------------------------------------------------------------------")
-	console.log(req.query.course_code)
 	if (!req.query.course_code || req.query.course_code == "ALL"){
-		console.log("inside if-----------------------------------------------------------------------")
 		File.findAll().then(function(results) {
-		// console.log(results);
 		res.render('course.html', {
 			files:results
 		});
 	});
 
 	}else{
-		console.log("inside else-----------------------------------------------------------------------")
 		File.findAll({ where: {course:req.query.course_code} }).then(function(results) {
-		// console.log(results);
 		res.render('course.html', {
 			files:results
 		});
 	});
-
-	}
-	console.log("out----------------------------------------------------------------------")
-
-
-	
+	}	
 });
 
 
-
-app.get('/files',  function(req, res) {
-
-	res.render('files.html');
-});
 
 const avatarpic = multer({dest: './avatar_pics'})
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
-	
-	// const email = req.session.currentUser;
 	const email = req.user.email;
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
 			res.redirect('/profile');
 			console.log("HAHAA " + user.avatar);
-		});
-		 
+		}); 
 	});
 });
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads');
@@ -141,16 +101,11 @@ const storage = multer.diskStorage({
   }
 });
 
-//const file_upload = multer({dest: './uploads'});
 
 const file_upload = multer({storage:storage});
 
 app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(req, res){
-
-	// const email = req.session.currentUser;
 	const email = req.user.email;
-
-	// console.log(req.session.currentUser);
 	
 	File.create({
             name:'/uploads/' + req.file.filename,
@@ -159,13 +114,9 @@ app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(re
             user_id:req.user.id,
             description: req.body.description
         }).then(function(response) {
-            //req.flash('signUpMessage', 'Signed up successfully!');
             return res.redirect('/profile');
         });
-
-	
 });
-
 
 
 function requireSignedIn(req, res, next) {
