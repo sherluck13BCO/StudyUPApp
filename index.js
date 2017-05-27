@@ -28,10 +28,22 @@ app.use(require('./auth'));
 
 
 var user = function retrieveSignedInUser(req, res, next) {
-    req.user = req.session.currentUser;
-    next();
-}
+  	const email = req.session.currentUser;
 
+    User.findOne({ where: { email:email } }).then(function(user) {
+    	// console.log("retrieveSignedInUser" + user);
+    	
+    	// console.log("retrieveSignedInUser2" + req.session.currentUser);
+    	// 	//req.session.currentUser = user;
+    	// console.log("retrieveSignedInUser3" + req.session.currentUser);
+    	req.user = user;
+    	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
+    	console.log(req.user);
+    	// next();
+    });
+    next();
+
+}
 
 app.use(user);
 
