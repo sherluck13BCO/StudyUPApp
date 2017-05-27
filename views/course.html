@@ -1,0 +1,154 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Profile</title>
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/bootstrap-table.min.css">
+
+    <style type="text/css">
+        .btn-submit {
+          margin-top: 10px;
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
+        .btn-submit:hover {
+          opacity: 1;
+          text-decoration: none;
+        }
+        .navbar-brand:hover{
+          font-weight: bold;
+        }
+        .navbar-default {
+          background-color: #dbedff;
+        }
+        .alert-info{
+          background-color: #ebd9e5;
+          opacity: 0.4;
+        }
+		h2 {
+		  text-align: center;
+		}
+		.table-final{
+			height:auto !important;
+		}
+
+		table caption {
+			padding: .5em 0;
+		}
+
+		@media screen and (max-width: 767px) {
+		  table caption {
+		    border-bottom: 1px solid #ddd;
+		  }
+		}
+
+		.p {
+		  text-align: center;
+		  padding-top: 140px;
+		  font-size: 14px;
+		}
+
+		.iframe-container {    
+		    padding-bottom: 60%;
+		    padding-top: 30px; height: 0; overflow: hidden;
+		}
+		 
+		.iframe-container iframe,
+		.iframe-container object,
+		.iframe-container embed{
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		}
+
+		.modal.in .modal-dialog {
+		  transform: none; /*translate(0px, 0px);*/
+		}
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">STUDY UP</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                	<li><a href="/course">FILES</a></li>
+                    <li><a href="/signout">SIGN OUT</a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- NAVBAR CODE END -->
+
+
+	<div class="container">
+	  <div class="row">
+	    <div class="col-xs-12">
+	      <div class=" table-final">
+	        <table data-toggle="table" data-sort-name="date" data-sort-order="desc" class = "table-final">
+			    <thead>
+					<tr>
+						<th data-field="subject" data-sortable="true"> Subject </th>
+						<th data-field="date" data-sortable="true"> Date Posted </th>
+						<th data-field="description" data-sortable="true"> Description </th>
+						<th data-field="file" data-sortable="true"> File </th>
+					</tr>
+				</thead>
+	          <tbody>
+	            <tr>
+	              <td>CMSC123</td>
+	              <td>7/6/17</td>
+	              <td>Notes for Quiz 3</td>
+	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
+	            </tr>
+	            <tr>
+	              <td>CMSC123</td>
+	              <td>7/6/17</td>
+	              <td>Notes for Quiz 5</td>
+	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
+	            </tr>
+	          </tbody>
+	          
+	        </table>
+	      </div><!--end of .table-responsive-->
+	    </div>
+	  </div>
+	</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+    <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="/static/bootstrap.js"></script>
+
+</body>
+
+</html>
