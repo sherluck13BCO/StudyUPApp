@@ -110,7 +110,7 @@ app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(re
 	File.create({
             name:'/uploads/' + req.file.filename,
             course: req.body.course_code ,
-            course_num:req.body.course_number,
+            course_num:req.body.course_code+req.body.course_number,
             user_id:req.user.id,
             description: req.body.description
         }).then(function(response) {

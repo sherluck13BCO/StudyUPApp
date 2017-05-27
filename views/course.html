@@ -125,10 +125,13 @@ input[type=text]:focus {
 
         </div>
     </div>
-  
 
-  <form align="middle" action="/course" method="get" enctype="multipart/form-data">
-         <div>
+    <div class="container">
+	  	<div class="row">
+		    <div class="col-xs-12">
+
+		    	<form align="middle" action="/course" method="get" enctype="multipart/form-data">
+         
                         <label for="course_number">Course Code</label>
                           <select class="form-control" id="course_number" name="course_code">
                           <option value ="ALL">ALL</option>
@@ -170,10 +173,16 @@ input[type=text]:focus {
                             <option value ="VISUAL COMMUNICATION">VISUAL COMMUNICATION</option>
                             <option value ="ZOOLOGY">ZOOLOGY</option>
                           </select>
-                      </div>
+                      
                         <button class="btn btn-submit">Search</button>
 
                     </form>
+		    </div>
+	  	</div>
+	</div>
+  
+
+  
 
 	<div class="container">
 	  <div class="row">
@@ -192,7 +201,7 @@ input[type=text]:focus {
 
 	            {% for file in files %}
 	            <tr>
-				  <td>{{ file.course }}</td>
+				  <td>{{ file.course_num }}</td>
 	              <td>{{ file.description }}</td>
 	              <td>{{ file.createdAt }}</td>
 	              <td><a href="{{file.name}}">file</a></td>
