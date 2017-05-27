@@ -27,26 +27,26 @@ app.use('/avatars', express.static('./avatar_pics'));
 app.use(require('./auth'));
 
 
-var user = function retrieveSignedInUser(req, res, next) {
-  	const email = req.session.currentUser;
+// var user = function retrieveSignedInUser(req, res, next) {
+//   	const email = req.session.currentUser;
 
-    User.findOne({ where: { email:email } }).then(function(user) {
-    	// console.log("retrieveSignedInUser" + user);
+//     User.findOne({ where: { email:email } }).then(function(user) {
+//     	// console.log("retrieveSignedInUser" + user);
     	
-    	// console.log("retrieveSignedInUser2" + req.session.currentUser);
-    	// 	//req.session.currentUser = user;
-    	// console.log("retrieveSignedInUser3" + req.session.currentUser);
-    	req.user = user;
-    	currentUse =user;
-    	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
-    	console.log(req.user);
-    	// next();
-    });
-    next();
+//     	// console.log("retrieveSignedInUser2" + req.session.currentUser);
+//     	// 	//req.session.currentUser = user;
+//     	// console.log("retrieveSignedInUser3" + req.session.currentUser);
+//     	req.user = user;
+//     	currentUse =user;
+//     	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
+//     	console.log(req.user);
+//     	// next();
+//     });
+//     next();
 
-}
+// }
 
-app.use(user);
+// app.use(user);
 
 
 
