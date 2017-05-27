@@ -42,6 +42,8 @@ const File = database.define('files', {
     },
     course:{
         type: Sequelize.STRING,
+    }, course_num:{
+        type: Sequelize.INTEGER,
     },
     user_id: {
         type: Sequelize.INTEGER,

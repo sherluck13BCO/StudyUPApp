@@ -1,3 +1,4 @@
+
 const express = require('express');
 const database = require('./database');
 const File = require('./models').File;
@@ -39,8 +40,8 @@ var user = function retrieveSignedInUser(req, res, next) {
     	// 	//req.session.currentUser = user;
     	// console.log("retrieveSignedInUser3" + req.session.currentUser);
     	req.user = user;
-    	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
-    	console.log(req.user);
+    	// console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
+    	// console.log(req.user);
     	next();
     });
     // next();
@@ -60,7 +61,7 @@ app.get('/profile', requireSignedIn, function(req, res) {
 
 
 			File.findAll({ where: {user_id:req.user.id} }).then(function(results) {
-		console.log(results);
+		// console.log(results);
 		res.render('profile.html', {
 			files:results,
 			user: user
@@ -75,18 +76,36 @@ app.get('/profile', requireSignedIn, function(req, res) {
 
 app.get('/', function(req, res) {
 
-	console.log("HELLLOO");
+	// console.log("HELLLOO");
 	res.render('index.html');
 });
 
 app.get('/course', function(req, res) {
-	
-	File.findAll().then(function(results) {
-		console.log(results);
+	console.log("insidecourse-------------------------------------------------------------------------")
+	console.log(req.query.course_code)
+	if (!req.query.course_code || req.query.course_code == "ALL"){
+		console.log("inside if-----------------------------------------------------------------------")
+		File.findAll().then(function(results) {
+		// console.log(results);
 		res.render('course.html', {
 			files:results
 		});
 	});
+
+	}else{
+		console.log("inside else-----------------------------------------------------------------------")
+		File.findAll({ where: {course:req.query.course_code} }).then(function(results) {
+		// console.log(results);
+		res.render('course.html', {
+			files:results
+		});
+	});
+
+	}
+	console.log("out----------------------------------------------------------------------")
+
+
+	
 });
 
 
@@ -131,11 +150,12 @@ app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(re
 	// const email = req.session.currentUser;
 	const email = req.user.email;
 
-	console.log(req.session.currentUser);
+	// console.log(req.session.currentUser);
 	
 	File.create({
             name:'/uploads/' + req.file.filename,
-            course: req.body.course_code + req.body.course_number,
+            course: req.body.course_code ,
+            course_num:req.body.course_number,
             user_id:req.user.id,
             description: req.body.description
         }).then(function(response) {
