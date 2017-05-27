@@ -113,8 +113,8 @@
 			    <thead>
 					<tr>
 						<th data-field="subject" data-sortable="true"> Subject </th>
-						<th data-field="date" data-sortable="true"> Date Posted </th>
 						<th data-field="description" data-sortable="true"> Description </th>
+						<th data-field="date" data-sortable="true"> Date Posted </th>
 						<th data-field="file" data-sortable="true"> File </th>
 					</tr>
 				</thead>
@@ -122,15 +122,27 @@
 	            <tr>
 	              <td>CMSC123</td>
 	              <td>7/6/17</td>
-	              <td>Notes for Quiz 3</td>
 	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
 	            </tr>
-	            <tr>
+
+	            {% for file in files %}
+				  <td>{{ file.course }}</td>
+	              <td>{{ file.description }}</td>
+	              <td>{{ file.createdAt }}</td>
+	              <td><a href="{{file.name}}">file</a></td>
+				{% else %}
+				  <li>Empty file</li>
+				{% endfor %}
+
+
+	            <!--<tr>
 	              <td>CMSC123</td>
 	              <td>7/6/17</td>
 	              <td>Notes for Quiz 5</td>
 	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
-	            </tr>
+	            </tr>-->
+
+
 	          </tbody>
 	          
 	        </table>

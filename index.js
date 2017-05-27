@@ -71,11 +71,13 @@ const file_upload = multer({dest: './uploads'});
 app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(req, res){
 
 	const email = req.session.currentUser;
+
+	console.log(req.session.currentUser);
 	
 	File.create({
             name:'/uploads/' + req.file.filename,
             course: req.body.course_code + req.body.course_number,
-            user:email.id,
+            user_id:email.id,
             description: req.body.description
         }).then(function(response) {
             //req.flash('signUpMessage', 'Signed up successfully!');
