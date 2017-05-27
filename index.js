@@ -28,10 +28,32 @@ app.use('/uploads', express.static('./uploads'));
 
 app.use(require('./auth'));
 
+var user = function retrieveSignedInUser(req, res, next) {
+
+  	const email = req.session.currentUser;
+
+    User.findOne({ where: { email:email } }).then(function(user) {
+    	// console.log("retrieveSignedInUser" + user);
+    	
+    	// console.log("retrieveSignedInUser2" + req.session.currentUser);
+    	// 	//req.session.currentUser = user;
+    	// console.log("retrieveSignedInUser3" + req.session.currentUser);
+    	req.user = user;
+    	console.log('hahkjahdlshdkjlhadfhlfhasdhfas')
+    	console.log(req.user);
+    	next();
+    });
+    // next();
+
+}
+
+app.use(user);
 
 app.get('/profile', requireSignedIn, function(req, res) {
-	console.log()
-	const email =req.session.currentUser;
+	
+
+	// const email =req.session.currentUser;
+		const email =req.user.email;
 
 	User.findOne({ where: {email:email} }).then(function(user) {
 		res.render('profile.html', {
@@ -41,22 +63,27 @@ app.get('/profile', requireSignedIn, function(req, res) {
 });
 
 app.get('/', function(req, res) {
+
 	console.log("HELLLOO");
 	res.render('index.html');
 });
 
 app.get('/course', function(req, res) {
+	
 	res.render('course.html');
 });
 
 app.get('/files',  function(req, res) {
+
 	res.render('files.html');
 });
 
 const avatarpic = multer({dest: './avatar_pics'})
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
-	const email = req.session.currentUser;
+	
+	// const email = req.session.currentUser;
+	const email = req.user.email;
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
 			res.redirect('/profile');
@@ -83,7 +110,8 @@ const file_upload = multer({storage:storage});
 
 app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(req, res){
 
-	const email = req.session.currentUser;
+	// const email = req.session.currentUser;
+	const email = req.user.email;
 
 	console.log(req.session.currentUser);
 	
