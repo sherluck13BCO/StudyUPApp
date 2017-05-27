@@ -103,7 +103,11 @@ const avatarpic = multer({dest: './avatar_pics'})
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
 
-	const email = req.user;
+console.log("wokieeeeeeeeeeee")
+	console.log(req.file)
+	const email = req.user.email;
+
+		console.log(req.user);
 
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
