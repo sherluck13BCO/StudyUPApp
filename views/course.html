@@ -204,7 +204,8 @@ input[type=text]:focus {
 				  <td>{{ file.course_num }}</td>
 	              <td>{{ file.description }}</td>
 	              <td>{{ file.createdAt }}</td>
-	              <td><a href="{{file.name}}">file</a></td>
+	              <td><a href="{{file.f_name}}">file</a></td>
+                  <td><form action="/comments" method="get"><input type="hidden" name="id" value="{{file.id}}"><button class="btn btn-delete">Delete</button></form></td>
 				<tr />
 				{% endfor %}
 

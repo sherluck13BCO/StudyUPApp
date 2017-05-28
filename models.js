@@ -37,7 +37,7 @@ const File = database.define('files', {
         autoIncrement: true,
         allowNull: false
     },
-    name:{
+    f_name:{
         type: Sequelize.STRING,
     },
     course:{
@@ -61,10 +61,37 @@ const File = database.define('files', {
     timestamps: true
 });
 
+const Comment = database.define('comments', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false
+    },
+    content:{
+        type: Sequelize.STRING,
+    },
+    file_id: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: {
+            model: 'files',
+            key: 'id'
+        }
+    },
+    name: {
+        type: Sequelize.STRING
+    }
+}, {
+    timestamps: true
+});
+
 File.belongsTo(User, { foreignKey: 'user_id' });
+
+Comment.belongsTo(File, { foreignKey: 'file_id' });
 
 database.sync();
 
 module.exports.File = File;
-
+module.exports.Comment = Comment;
 module.exports.User = User;

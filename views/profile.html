@@ -212,6 +212,7 @@
                             <th data-field="subject" data-sortable="true"> Subject </th>
                             <th data-field="description" data-sortable="true"> Description </th>
                             <th data-field="file" data-sortable="true"> File </th>
+                            <th data-field="file" data-sortable="true"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -219,7 +220,7 @@
                             <tr>
                               <td>{{ file.course_num }}</td>
                               <td>{{ file.description }}</td>
-                              <td><a href="{{file.name}}">file</a></td>
+                              <td><a href="{{file.f_name}}">file</a></td>
                               <td><form action="/delete" method="post"><input type="hidden" name="id" value="{{file.id}}"><button class="btn btn-delete">Delete</button></form></td>
                             <tr />
                             {% endfor %}

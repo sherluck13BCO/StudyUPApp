@@ -3,6 +3,7 @@ const express = require('express');
 const database = require('./database');
 const File = require('./models').File;
 const User = require('./models').User;
+const Comment = require('./models').Comment;
 const flash = require('express-flash');
 var bodyparser = require('body-parser');
 const consolidate = require('consolidate');
@@ -54,6 +55,37 @@ app.get('/profile', requireSignedIn, function(req, res) {
 	});
 });
 
+app.get('/comments', requireSignedIn, function(req, res) {
+	const email =req.user.email;
+	console.log("THIS IS THE FILE ID" + req.query.id);
+
+	File.findOne({ where: {id:req.query.id} }).then(function(file) {
+		Comment.findAll({where: {file_id:req.query.id} }).then(function(results) {
+			res.render('comments.html', {
+				comments:results,
+				file_id:req.query.id,
+				user:req.user.name,
+				file:file
+
+			});
+		});
+	});
+});
+
+app.post('/postcomment', requireSignedIn, function(req, res) {
+
+	console.log(req.body.name + req.body.content + req.body.file_id);
+
+
+	Comment.create({
+        name:req.body.name,
+        content: req.body.content,
+        file_id: req.body.file_id
+    }).then(function(response) {
+        return res.redirect('/comments' + '?id=' + req.body.file_id);
+    });
+});
+
 app.post('/delete', requireSignedIn, function(req, res) {
 	const email =req.user.email;
 
@@ -70,7 +102,7 @@ app.get('/', function(req, res) {
 	res.render('index.html');
 });
 
-app.get('/course', function(req, res) {
+app.get('/course', requireSignedIn, function(req, res) {
 	if (!req.query.course_code || req.query.course_code == "ALL"){
 		File.findAll().then(function(results) {
 		res.render('course.html', {
@@ -120,7 +152,7 @@ app.post('/uploadFile', requireSignedIn, file_upload.single('file'), function(re
 	const email = req.user.email;
 	
 	File.create({
-            name:'/uploads/' + req.file.filename,
+            f_name:'/uploads/' + req.file.filename,
             course: req.body.course_code ,
             course_num:req.body.course_code+req.body.course_number,
             user_id:req.user.id,
