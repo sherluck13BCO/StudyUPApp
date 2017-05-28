@@ -54,6 +54,18 @@ app.get('/profile', requireSignedIn, function(req, res) {
 	});
 });
 
+app.post('/delete', requireSignedIn, function(req, res) {
+	const email =req.user.email;
+
+	File.destroy({
+	    where: {
+	       id:req.body.id
+	    }
+	}).then(function(results) {
+		res.redirect('/profile');
+	});
+});
+
 app.get('/', function(req, res) {
 	res.render('index.html');
 });

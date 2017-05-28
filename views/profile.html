@@ -22,6 +22,13 @@
           color:black;
           opacity: 0.6;
         }
+
+        .btn-delete {
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
         .btn-submit:hover {
           opacity: 1;
           text-decoration: none;
@@ -210,9 +217,10 @@
                         <tbody>
                             {% for file in files %}
                             <tr>
-                              <td>{{ file.course }}</td>
+                              <td>{{ file.course_num }}</td>
                               <td>{{ file.description }}</td>
                               <td><a href="{{file.name}}">file</a></td>
+                              <td><form action="/delete" method="post"><input type="hidden" name="id" value="{{file.id}}"><button class="btn btn-delete">Delete</button></form></td>
                             <tr />
                             {% endfor %}
 
