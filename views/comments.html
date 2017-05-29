@@ -7,7 +7,7 @@
     <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-    <title>Profile</title>
+    <title>Comments</title>
     <!-- BOOTSTRAP STYLE SHEET -->
     <link rel="stylesheet" href="/static/main.css">
     <link rel="stylesheet" href="/static/bootstrap.css">
@@ -76,7 +76,7 @@
 
       <div class="panel panel-default">
         <div class="panel-body panel-center">
-          <a href="{{ file.f_name }}">Link to File</a> || {{file.description}}
+          {{file.course_num}} || <a href="{{ file.f_name }}">Link to File</a> || {{file.description}}
         </div>
       </div>
 

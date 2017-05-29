@@ -92,9 +92,9 @@
           <div class="col-md-8">
             <div class="alert alert-info">
               {% if user.name %}
-                 <h2>{{ user.name }}</h2>
+                 <h2>Hello, {{ user.name }}! </h2>
               {% else %}
-                 <h2>Name here</h2>
+                 <h2>Hello!</h2>
               {% endif %}
              
             </div>
@@ -175,8 +175,7 @@
                       <br />
 
                       <div>
-                        <label for="name">File Name</label>
-                        <input type="text" name="name" id="name" class="form-control">
+                        <input type="hidden" name="name" id="name" class="form-control" value="name">
                       </div>
 
                       <br />
